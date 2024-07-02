@@ -2,6 +2,8 @@ package edu.pnu.controller;
 
 import java.util.List;
 
+import edu.pnu.domain.Link;
+import edu.pnu.service.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.pnu.domain.Edu_list;
 import edu.pnu.domain.Ncs;
-import edu.pnu.domain.Senti_result;
 import edu.pnu.repository.ListRepository;
 import edu.pnu.repository.NcsRepository;
 import edu.pnu.service.listService;
@@ -35,6 +36,9 @@ public class MainController {
 
     @Autowired
     private listService ncsCodeService;
+
+    @Autowired
+    private LinkService linkService;
 	
 
     @GetMapping("/ncscodes/six/{part}")
@@ -52,6 +56,9 @@ public class MainController {
     public @ResponseBody List<Edu_list> geNcsCodeByFirstSixSortByPs(@PathVariable String part) {
         return ncsCodeService.getNcsCodeByFirstSixSortByPs(part);
     }
+    @GetMapping("/urls")
+    public @ResponseBody List<Link> getLinks(@RequestParam("course_id") Long course_id) {
+        return linkService.getLinksByCourseId(course_id);
 
-    
+    }
 }

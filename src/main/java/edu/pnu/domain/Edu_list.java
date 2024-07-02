@@ -49,6 +49,14 @@ public class Edu_list {
     private String trainDay;
     @Column(name="train_time")
     private String trainTime;
+	@OneToOne @JoinColumn(name = "Id", referencedColumnName = "course_id")
+	private Summary_review summaryReview;
+	@OneToOne @JoinColumn(name = "Id", referencedColumnName = "course_id")
+	private Summary_content summaryContent;
+
+//	@OneToOne @JoinColumn(name = "id", referencedColumnName = "course_id")
+//	private Link link;
+
     
 //    @Column(name="훈련목표", columnDefinition="varchar(5000)")
 //    private String goals;

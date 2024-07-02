@@ -11,4 +11,5 @@ public interface NcsRepository extends JpaRepository<Ncs, Long>{
 //	List<Ncs> findAllByMid(String mid);
 //	List<Ncs> findAllBySmall(String small);
 //	List<Ncs> findAllBySSmall(String ssmall);
+
 }

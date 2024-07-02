@@ -19,6 +19,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 @Component
@@ -31,28 +33,31 @@ public class AccountFileUtil {
 	@PostConstruct
 	public void init() {
 		File tempFolder = new File(uploadPath);
-		
-		if(tempFolder.exists()==false) {
-			tempFolder.mkdir();
+		if(!tempFolder.exists()) {
+			boolean mkdir = tempFolder.mkdir();
 		}
 		uploadPath=tempFolder.getAbsolutePath();
 		log.info("--------------------------------");
 		log.info(uploadPath);
 	}
 	
-	public List<String> saveFiles(List<MultipartFile> files) throws RuntimeException{
-		if(files==null || files.size()==0) {
+	public List<String> saveFiles(@RequestPart("files") List<MultipartFile> files) throws RuntimeException{
+		if(files==null || files.isEmpty()) {
 			return List.of();
 		}
 		List<String> uploadNames=new ArrayList<>();
 		for(MultipartFile multipartFile : files) {
 			String savedName =multipartFile.getOriginalFilename();
+			if(savedName == null){
+				continue;
+			}
 			
 			Path savePath = Paths.get(uploadPath, savedName);
 			
 			try {
 				Files.copy(multipartFile.getInputStream(), savePath);
 				uploadNames.add(savedName);
+				System.out.println("File saved:" + savePath.toString());
 			}catch(IOException e) {
 				throw new RuntimeException(e.getMessage());
 			}
