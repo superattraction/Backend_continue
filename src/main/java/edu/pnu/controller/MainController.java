@@ -15,7 +15,7 @@ import edu.pnu.domain.Edu_list;
 import edu.pnu.domain.Ncs;
 import edu.pnu.repository.ListRepository;
 import edu.pnu.repository.NcsRepository;
-import edu.pnu.service.listService;
+import edu.pnu.service.ListService;
 
 @Controller
 public class MainController {
@@ -35,7 +35,7 @@ public class MainController {
 	}
 
     @Autowired
-    private listService ncsCodeService;
+    private ListService listService;
 
     @Autowired
     private LinkService linkService;
@@ -43,18 +43,18 @@ public class MainController {
 
     @GetMapping("/ncscodes/six/{part}")
     public @ResponseBody List<Edu_list> getNcsCodeByFirstSix(@PathVariable String part) {
-        return ncsCodeService.getNcsCodeByFirstSix(part);
+        return listService.getNcsCodeByFirstSix(part);
     }
 
 
     @GetMapping("/ncscodes/six/ratingsort/{part}")
     public @ResponseBody List<Edu_list> geNcsCodeByFirstSixSortByRating(@PathVariable String part) {
-        return ncsCodeService.getNcsCodeByFirstSixSortByRating(part);
+        return listService.getNcsCodeByFirstSixSortByRating(part);
     }
     
     @GetMapping("/ncscodes/six/pssort/{part}")
     public @ResponseBody List<Edu_list> geNcsCodeByFirstSixSortByPs(@PathVariable String part) {
-        return ncsCodeService.getNcsCodeByFirstSixSortByPs(part);
+        return listService.getNcsCodeByFirstSixSortByPs(part);
     }
     @GetMapping("/urls")
     public @ResponseBody List<Link> getLinks(@RequestParam("course_id") Long course_id) {

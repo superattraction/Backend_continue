@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -21,23 +22,24 @@ public class WebSecurityConfig {
         http
                 // 403, "http.csrf.disable()" deprecated
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-                        // HTTP 요청에 대한 권한 설정, 모든 경로로 지정("/**")
-                        // permitAll() : 해당 요청에 대한 모든 사용자에게 접근 권한 부여
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN") // Only ADMIN role can access /admin/**
+                        .anyRequest().authenticated() // All other endpoints require authentication
+                )
+                .formLogin(AbstractHttpConfigurer::disable)
+                .logout(LogoutConfigurer::permitAll
                 );
 
         return http.build();
     }
 
     @Bean
-    // BCryptPasswordEncoder의 interface
-    PasswordEncoder passwordEncoder() {
+   public  BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    // Spring 보안 및 인증 담당
     AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }

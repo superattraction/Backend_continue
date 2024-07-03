@@ -6,8 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import edu.pnu.domain.UserEntity;
 
+import java.util.Optional;
+
 @Repository
 
 public interface UserRepository extends JpaRepository<UserEntity, String> {
-	public boolean existsByEmailAndPassword(String email, String password);
+	boolean existsByEmailAndPassword(String email, String password);
+	Optional<UserEntity> findByEmail(String email);
 }

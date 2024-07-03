@@ -2,15 +2,16 @@ package edu.pnu.service;
 
 import java.util.List;
 
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.pnu.domain.Edu_list;
-import edu.pnu.domain.Senti_result;
 import edu.pnu.repository.ListRepository;
-import edu.pnu.repository.SentiRepository;
+
+@NoArgsConstructor
 @Service
-public class listService {
+public class ListService {
 	 @Autowired
 	    private ListRepository listRepository;
 

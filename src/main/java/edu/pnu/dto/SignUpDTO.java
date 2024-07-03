@@ -10,13 +10,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SignUpDTO {
-    private String id;
     private String email;
     private String name;
     private String password;
     private String confirmPassword;
     private String phoneNumber;
-    private String userType;
+    private String user_type;
     private LocalDateTime createdAt;
     private LocalDateTime editedAt;
     private LocalDateTime lastLoginAt;

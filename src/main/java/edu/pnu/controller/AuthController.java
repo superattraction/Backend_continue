@@ -15,17 +15,16 @@ import edu.pnu.service.AuthService;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-    @Autowired AuthService authService;
+    @Autowired
+    private AuthService authService;
 
     @PostMapping("/signUp")
     public ResponseDTO<?> signUp(@RequestBody SignUpDTO requestBody) {
-        ResponseDTO<?> result = authService.signUp(requestBody);
-        return result;
+        return authService.signUp(requestBody);
     }
 
     @PostMapping("/signin")
     public ResponseDTO<?> login(@RequestBody LoginDTO requestBody) {
-    	ResponseDTO<?> result = authService.login(requestBody);
-        return result;
+        return authService.login(requestBody);
     }
 }

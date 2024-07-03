@@ -1,12 +1,7 @@
 package edu.pnu.domain;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,6 +27,7 @@ public class Edu_list {
 	private String phone;
 	@Column(name="주소")
 	private String address;
+	private String address2;
 	@Column(name="교육비", columnDefinition="varchar(500)")
 	private String fee;
     @Column(name = "ncs_num", columnDefinition="varchar(1000)")  // 데이터베이스 컬럼 이름과 매핑
@@ -53,6 +49,30 @@ public class Edu_list {
 	private Summary_review summaryReview;
 	@OneToOne @JoinColumn(name = "Id", referencedColumnName = "course_id")
 	private Summary_content summaryContent;
+	@Column(name="urls")
+	private String urls;
+	@Column(name="edu_institute")
+	private String eduInstitute;
+
+
+	@PostLoad
+	public void postLoad() {
+		if(address!=null && !address.isEmpty()){
+            this.address2 = extractAddress(address);
+		}
+	}
+	private String extractAddress(String address) {
+		int firstSpaceIndex = address.indexOf(" ");
+		if (firstSpaceIndex != -1) {
+			int secondSpaceIndex = address.indexOf(" ", firstSpaceIndex + 1);
+			if (secondSpaceIndex != -1) {
+				return address.substring(0, secondSpaceIndex).trim();
+			} else {
+				return address.substring(0, firstSpaceIndex).trim(); // 두 번째 공백 문자가 없으면 첫 번째 공백 문자까지 자름
+			}
+		}
+		return address;
+	}
 
 //	@OneToOne @JoinColumn(name = "id", referencedColumnName = "course_id")
 //	private Link link;
