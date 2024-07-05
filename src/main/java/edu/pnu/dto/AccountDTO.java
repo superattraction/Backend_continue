@@ -20,5 +20,5 @@ public class AccountDTO {
 	private List<MultipartFile> files = new ArrayList<>();
 	@Builder.Default
 	private List<String> uploadFileNames=new ArrayList<>();
-	
+	private String uniqueId; // 고유번호
 }

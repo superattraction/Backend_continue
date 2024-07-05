@@ -79,4 +79,13 @@ public class AccountFileUtil {
 		}
 		return ResponseEntity.ok().headers(headers).body(resource);
 	}
+	public boolean deleteFile(String fileName) {
+		try {
+			Path filePath = Paths.get(uploadPath, fileName);
+			return Files.deleteIfExists(filePath);
+		} catch (IOException e) {
+			log.error("Failed to delete file: " + fileName, e);
+			return false;
+		}
+	}
 }
