@@ -3,6 +3,7 @@ package edu.pnu.controller;
 import java.util.List;
 
 import edu.pnu.domain.Link;
+import edu.pnu.domain.Senti_result_lg;
 import edu.pnu.service.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -60,5 +61,13 @@ public class MainController {
     public @ResponseBody List<Link> getLinks(@RequestParam("course_id") Long course_id) {
         return linkService.getLinksByCourseId(course_id);
 
+    }
+    @GetMapping("/ncscodes/two/raitingsort/")
+    public @ResponseBody List<Senti_result_lg> getAllLgSenti() {
+        return listService.getNcsCodeLgAllSenti();
+    }
+    @GetMapping("/ncscodes/two/raitingsort/{num}")
+    public @ResponseBody List<Senti_result_lg> getAllLgSentiByNum(@PathVariable int num) {
+        return listService.getNcsCodeLgSortSenti(num);
     }
 }
