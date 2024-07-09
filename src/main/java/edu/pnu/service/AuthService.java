@@ -1,5 +1,7 @@
 package edu.pnu.service;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,8 @@ import edu.pnu.security.TokenProvider;
 
 import java.util.Optional;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Service
 public class AuthService {
     @Autowired 

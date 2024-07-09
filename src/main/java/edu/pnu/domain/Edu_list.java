@@ -17,9 +17,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Edu_list {
-	@Id 
-	private Long Id;
-	@OneToOne @JoinColumn(name = "Id", referencedColumnName = "course_id")
+	@Id
+	@Column(name = "course_id")
+	private Long course_id;
+	@OneToOne @JoinColumn(name = "course_id", referencedColumnName = "course_id")
 	private Senti_result sentiResult;
 	@Column(name="course_name")
 	private String title;
@@ -28,9 +29,9 @@ public class Edu_list {
 	@Column(name="주소")
 	private String address;
 	private String address2;
-	@Column(name="교육비", columnDefinition="varchar(500)")
+	@Column(name="교육비", columnDefinition="varchar(100)")
 	private String fee;
-    @Column(name = "ncs_num", columnDefinition="varchar(1000)")  // 데이터베이스 컬럼 이름과 매핑
+    @Column(name = "ncs_num", columnDefinition="varchar(8)")  // 데이터베이스 컬럼 이름과 매핑
     private String ncsCode;
     @Column(name="ncs_ko")
 	private String ncsKorean;
@@ -45,9 +46,9 @@ public class Edu_list {
     private String trainDay;
     @Column(name="train_time")
     private String trainTime;
-	@OneToOne @JoinColumn(name = "Id", referencedColumnName = "course_id")
+	@OneToOne @JoinColumn(name = "course_id", referencedColumnName = "course_id")
 	private Summary_review summaryReview;
-	@OneToOne @JoinColumn(name = "Id", referencedColumnName = "course_id")
+	@OneToOne @JoinColumn(name = "course_id", referencedColumnName = "course_id")
 	private Summary_content summaryContent;
 	@Column(name="urls")
 	private String urls;

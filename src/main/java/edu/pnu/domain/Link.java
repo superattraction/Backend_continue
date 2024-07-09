@@ -15,8 +15,6 @@ import lombok.*;
 public class Link {
 
     @Id
-    private Long id;
-
     @Column(name = "course_id")
     private Long course_id;
 

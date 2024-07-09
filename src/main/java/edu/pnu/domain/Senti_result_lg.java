@@ -20,7 +20,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Senti_result_lg{
     @Id
-    @Column(name="id")
+    @Column(name="sid")
     private Long id;
 
     @Column(name="large")

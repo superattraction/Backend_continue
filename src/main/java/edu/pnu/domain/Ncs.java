@@ -1,10 +1,6 @@
 package edu.pnu.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,11 +16,17 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Ncs {
 	@Id
+	@Column(name = "ncsid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long ncsid;
+
+	@Column(name = "large")
 	private String large;
+	@Column(name = "mid")
 	private String mid;
+	@Column(name = "small")
 	private String small;
+	@Column(name = "ssmall")
 	private String ssmall;
 
 }

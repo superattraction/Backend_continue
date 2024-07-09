@@ -20,7 +20,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Summary_content {
     @Id
-    private Long id;
+    @Column(name="course_id")
     private Long course_id;
     @Column(columnDefinition = "TEXT")
     private String courseName;
