@@ -1,6 +1,8 @@
 package edu.pnu.domain;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 import edu.pnu.dto.LoginResponseDTO;
@@ -10,6 +12,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Data
 @AllArgsConstructor
@@ -46,8 +50,6 @@ public class UserEntity {
         this.name = dto.getName();
         this.phoneNumber = dto.getPhoneNumber();
         this.user_type = dto.getUser_type() != null ? Role.valueOf(dto.getUser_type()) : Role.ROLE_USER;
-
-//        this.userType = dto.getUserType();
         this.token = "";
         this.createdAt = LocalDateTime.now();
         this.editedAt = LocalDateTime.now();
@@ -55,5 +57,6 @@ public class UserEntity {
     public UserEntity(LoginResponseDTO dto) {     
         this.lastLoginAt = LocalDateTime.now();
     }
+
 
 }

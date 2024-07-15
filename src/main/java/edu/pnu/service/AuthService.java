@@ -1,7 +1,9 @@
 package edu.pnu.service;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,17 +18,15 @@ import edu.pnu.security.TokenProvider;
 
 import java.util.Optional;
 
-@NoArgsConstructor
-@AllArgsConstructor
+
+@RequiredArgsConstructor
 @Service
 public class AuthService {
-    @Autowired 
-    private UserRepository userRepository;
-    @Autowired 
-    private TokenProvider tokenProvider;
 
-    @Autowired
-    private  BCryptPasswordEncoder passwordEncoder;
+
+    private final UserRepository userRepository;
+    private final TokenProvider tokenProvider;
+    private final BCryptPasswordEncoder passwordEncoder;
 
 
     public  boolean userExists(String email) {
@@ -51,7 +51,7 @@ public class AuthService {
 
         // UserEntity 생성
         UserEntity userEntity = new UserEntity(dto);
-        
+
      // 비밀번호 암호화
         String hashedPassword = passwordEncoder.encode(password);
         userEntity.setPassword(hashedPassword);
@@ -65,7 +65,7 @@ public class AuthService {
         return ResponseDTO.setSuccess("회원 생성에 성공했습니다");
         }
 
-        public ResponseDTO<LoginResponseDTO> login(LoginDTO dto) {
+        public ResponseDTO<LoginResponseDTO> login(LoginDTO dto, HttpServletResponse response) {
         String email = dto.getEmail();
         System.out.println("email은:"+email);
         String password = dto.getPassword();
@@ -80,12 +80,15 @@ public class AuthService {
             if(!passwordEncoder.matches(password, userEntity.getPassword())) {
                     return ResponseDTO.setFailed("비밀번호가 일치하지 않습니다.");
             }
+            // 로그인 시 역할 확인
+            if (!userEntity.getUser_type().name().equals("ROLE_ADMIN")) {
+                return ResponseDTO.setFailed("관리자만 로그인할 수 있습니다.");
+            }
             } catch(Exception e){
                 e.printStackTrace();
                 return ResponseDTO.setFailed("데이터 베이스 연결 실패.");
             }
-
-        // UserRepository를 이용하여 DB에 Entity 저장 (데이터 적재)// Client에 비밀번호 제공 방지
+            // UserRepository를 이용하여 DB에 Entity 저장 (데이터 적재)// Client에 비밀번호 제공 방지
         userEntity.setPassword("");
 
         int exprTime = 3600;     // 1h
@@ -94,7 +97,10 @@ public class AuthService {
         	return ResponseDTO.setFailed("토큰 생성에 실패하였습니다.");
         }
 
-        LoginResponseDTO loginResponseDto = new LoginResponseDTO(token, exprTime, userEntity);
+        //jwt토큰을 응답 헤더에 설정
+        response.setHeader("Authorization", "Bearer " + token);
+
+        LoginResponseDTO loginResponseDto = new LoginResponseDTO(exprTime, userEntity);
         return ResponseDTO.setSuccessData(userEntity.getName()+ "님, 로그인에 성공하였습니다.", loginResponseDto);
     }
 }

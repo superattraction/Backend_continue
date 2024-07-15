@@ -1,7 +1,10 @@
 package edu.pnu.controller;
 
 
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,17 +17,18 @@ import edu.pnu.service.AuthService;
 
 @RestController
 @RequestMapping("/api/auth")
+@RequiredArgsConstructor
 public class AuthController {
-    @Autowired
-    private AuthService authService;
 
-    @PostMapping("/signUp")
-    public ResponseDTO<?> signUp(@RequestBody SignUpDTO requestBody) {
-        return authService.signUp(requestBody);
-    }
+    private final AuthService authService;
 
+//    @PostMapping("/signUp")
+//    public ResponseDTO<?> signUp(@RequestBody SignUpDTO requestBody) {
+//        return authService.signUp(requestBody);
+//    }
     @PostMapping("/signin")
-    public ResponseDTO<?> login(@RequestBody LoginDTO requestBody) {
-        return authService.login(requestBody);
+    public ResponseEntity<ResponseDTO<?>> login(@RequestBody LoginDTO requestBody, HttpServletResponse response) {
+        ResponseDTO<?> result = authService.login(requestBody,response);
+        return ResponseEntity.ok(result);
     }
 }

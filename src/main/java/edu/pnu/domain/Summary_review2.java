@@ -12,13 +12,13 @@ import lombok.Setter;
 
 //edu_list table 만들기
 @Entity
-@Table(name="summary_review")
+@Table(name="summary_review2")
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Summary_review {
+public class Summary_review2 {
     @Id
     @Column(name="course_id")
     private Long course_id;

@@ -20,7 +20,8 @@ public class Edu_list {
 	@Id
 	@Column(name = "course_id")
 	private Long course_id;
-	@OneToOne @JoinColumn(name = "course_id", referencedColumnName = "course_id")
+	@OneToOne(optional = true) // 널값허용
+	@JoinColumn(name = "course_id", referencedColumnName = "sid")
 	private Senti_result sentiResult;
 	@Column(name="course_name")
 	private String title;
@@ -46,9 +47,9 @@ public class Edu_list {
     private String trainDay;
     @Column(name="train_time")
     private String trainTime;
-	@OneToOne @JoinColumn(name = "course_id", referencedColumnName = "course_id")
-	private Summary_review summaryReview;
-	@OneToOne @JoinColumn(name = "course_id", referencedColumnName = "course_id")
+	@OneToOne @JoinColumn(name = "course_id")
+	private Summary_review2 summaryReview2;
+	@OneToOne @JoinColumn(name = "course_id")
 	private Summary_content summaryContent;
 	@Column(name="urls")
 	private String urls;

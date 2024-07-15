@@ -2,9 +2,7 @@ package edu.pnu.domain;
 
 import javax.persistence.Column;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,8 +18,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Senti_result {
 	@Id
-    @Column(name="corse_id")
-    private Long id;
+    @Column(name="sid")
+    private Long sid;
     private String ns; //negative 평균
     private String ps; //positive 평균
 

@@ -39,9 +39,6 @@ public class MainController {
     @Autowired
     private LinkService linkService;
 
-    @Autowired
-    private SentiService sentiService;
-	
 
     @GetMapping("/ncscodes/six/{part}")
     public @ResponseBody List<Edu_list> getNcsCodeByFirstSix(@PathVariable String part) {
@@ -67,28 +64,5 @@ public class MainController {
 //    public @ResponseBody List<Senti_result_lg> getAllLgSenti() {
 //        return sentiService.getNcsC();
 //    }
-@GetMapping("/senti/ncscodes/{num}")
-public @ResponseBody List<Senti_result_lg> getAllLgSentiByNum(@PathVariable(required = false) Long num) {
-    if (num != null) {
-        return sentiService.findIdOrderByIdAsc(num);
-    } else {
-       return null;
-    }
-}
-@GetMapping("/senti/ncscodes")
-public @ResponseBody List<Senti_result_lg> getAllLgSentiByNum() {
-    return sentiService.getNcsCodeAllSenti();
-}
 
-    @GetMapping("/senti/trainingtype/{name}")
-    public @ResponseBody List<Senti_training_type> getAllSentiByName(@PathVariable(required = false) String name) {
-        if (name != null) {
-            return sentiService.getTrainNameSortSenti(name);
-        } else {
-            return null;}
-    }
-@GetMapping("/senti/trainingtype")
-public @ResponseBody List<Senti_training_type> getAllTtSentiByNum() {
-    return sentiService.getAllTrainingTypes();
-}
 }
