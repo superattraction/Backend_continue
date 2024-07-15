@@ -12,24 +12,31 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="sentiment_avg_lg")
+@Table(name="senti_lg")
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Senti_result_lg{
-    @Id
-    @Column(name="sid")
-    private Long id;
 
-    @Column(name="large")
+    @Id
+    @Column(name="nid")
+    private Integer nid;
+
+    @Column(name= "large")
     private String large;
 
-    @Column(name = "Ns")
+    @Column(name= "ns")
     private String NS;
 
-    @Column(name = "PS")//negative 평균
+    @Column(name= "ps")
     private String PS; //positive 평균
+
+    @Column(name= "rate_avg")
+    private Double rate_avg;
+
+    @Column(name= "s_job_avg")
+    private Double s_job_avg;
 
 }

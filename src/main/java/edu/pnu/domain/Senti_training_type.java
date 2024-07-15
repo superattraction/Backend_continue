@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 import lombok.*;
 
 @Entity
-@Table(name = "sentiment_avg_tt")
+@Table(name = "senti_tt")
 @Getter
 @Setter
 @Builder
@@ -16,14 +16,20 @@ import lombok.*;
 public class Senti_training_type {
     @Id
     @Column(name="tid")
-    private Long id;
+    private Integer id;
 
     @Column(name="training_type")
     private String trainingType;
 
-    @Column(name = "ns")
+    @Column(name="ns")
     private String ns;
 
-    @Column(name = "ps")
+    @Column(name="ps")
     private String ps;
+
+    @Column(name="rate_avg")
+    private Double rate_avg;
+
+    @Column(name="s_job_avg")
+    private Double s_job;
 }

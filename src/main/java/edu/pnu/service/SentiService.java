@@ -22,8 +22,8 @@ public class SentiService {
     @Autowired
     private SentiTtRepository sentiTtRepository;
 
-    public List<Senti_result_lg> findIdOrderByIdAsc(Long num) {
-        return sentiLgRepository.findAllByIdOrderByIdAsc(num);
+    public List<Senti_result_lg> findIdOrderByIdAsc(Integer id) {
+        return sentiLgRepository.findAllByNidOrderByNidAsc(id);
     }
     public List<Senti_result_lg> getNcsCodeAllSenti() {
         return  sentiLgRepository.findAll();

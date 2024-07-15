@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface LinkRepository extends JpaRepository<Link, Long> {
-    @Query(value = "SELECT * FROM link_idx l WHERE l.course_id = ?", nativeQuery = true)
+    @Query(value = "SELECT * FROM maindata l WHERE l.course_id = ?", nativeQuery = true)
     List<Link> findByCourse_id(Long course_id);
 }

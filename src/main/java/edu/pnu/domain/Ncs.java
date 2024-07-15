@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 //ncs_table 만들기
 @Entity
-@Table(name="ncs_table")
+@Table(name="ncsnum")
 @Getter
 @Setter
 @Builder
@@ -18,7 +18,7 @@ public class Ncs {
 	@Id
 	@Column(name = "ncsid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long ncsid;
+	private Integer ncsid;
 
 	@Column(name = "large")
 	private String large;

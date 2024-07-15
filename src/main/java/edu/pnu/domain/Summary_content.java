@@ -21,8 +21,8 @@ import lombok.Setter;
 public class Summary_content {
     @Id
     @Column(name="course_id")
-    private Long course_id;
-    @Column(columnDefinition = "TEXT")
+    private Integer course_id;
+    @Column(name="course_name",columnDefinition = "TEXT")
     private String courseName;
     @Column(columnDefinition = "TEXT")
     private String summaryContent;

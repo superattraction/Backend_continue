@@ -6,7 +6,7 @@ import lombok.*;
 
 
 @Entity
-@Table(name = "link_idx")
+@Table(name = "maindata")
 @Getter
 @Setter
 @Builder
@@ -16,28 +16,28 @@ public class Link {
 
     @Id
     @Column(name = "course_id")
-    private Long course_id;
+    private int course_id;
 
-    @Column(name="교육기관위치")
+    @Column(name="address2")
     private String edu_location;
 
-    @Column(name = "교육명")
+    @Column(name = "edu_institute")
     private String educationName;
 
-    @Column(name = "상세페이지")
+    @Column(name = "urls")
     private String detailPage;
 
-    @PostLoad
-    public void postLoad() {
-        if(edu_location!=null && !edu_location.isEmpty()){
-            this.edu_location = extractAddress(edu_location);
-        }
-    }
-    private String extractAddress(String address){
-        int index = address.indexOf("\n");
-        if(index != -1){
-            return address.substring(0,index).trim();
-        }
-        return address;
-    }
+//    @PostLoad
+//    public void postLoad() {
+//        if(edu_location!=null && !edu_location.isEmpty()){
+//            this.edu_location = extractAddress(edu_location);
+//        }
+//    }
+//    private String extractAddress(String address){
+//        int index = address.indexOf("\n");
+//        if(index != -1){
+//            return address.substring(0,index).trim();
+//        }
+//        return address;
+//    }
 }
