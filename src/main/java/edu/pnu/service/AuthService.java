@@ -45,9 +45,9 @@ public class AuthService {
                 return ResponseDTO.setFailed("중복된 Email 입니다.");
         }
 
-        if(!password.equals(confirmPassword)) {
-            return ResponseDTO.setFailed("비밀번호가 일치하지 않습니다.");
-        }
+//        if(!password.equals(confirmPassword)) {
+//            return ResponseDTO.setFailed("비밀번호가 일치하지 않습니다.");
+//        }
 
         // UserEntity 생성
         UserEntity userEntity = new UserEntity(dto);

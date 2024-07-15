@@ -22,10 +22,10 @@ public class AuthController {
 
     private final AuthService authService;
 
-//    @PostMapping("/signUp")
-//    public ResponseDTO<?> signUp(@RequestBody SignUpDTO requestBody) {
-//        return authService.signUp(requestBody);
-//    }
+    @PostMapping("/signUp")
+    public ResponseDTO<?> signUp(@RequestBody SignUpDTO requestBody) {
+        return authService.signUp(requestBody);
+    }
     @PostMapping("/signin")
     public ResponseEntity<ResponseDTO<?>> login(@RequestBody LoginDTO requestBody, HttpServletResponse response) {
         ResponseDTO<?> result = authService.login(requestBody,response);

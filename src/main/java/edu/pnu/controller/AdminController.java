@@ -28,6 +28,8 @@ public class AdminController {
 
 
 
+
+
     @GetMapping("/main")
     public ResponseEntity<String> adminPage() {
         System.out.println("어드민 들어옴");
@@ -72,14 +74,6 @@ public class AdminController {
     public @ResponseBody List<Senti_keyword> getAllKeywordByCourseId(@PathVariable(required = false) Integer courseId) {
         return keywordService.getById(courseId);
     }
-//    @GetMapping("/edu_st/{id}")
-//    public @ResponseBody Optional<Edu_st> getById_st(@PathVariable Long id) {
-//        return eduStService.findById(id);
-//    }
-//    @GetMapping("/edu_st")
-//    public @ResponseBody List<Edu_st> getAll_st() {
-//        return eduStService.findAll();
-//    }
     @GetMapping("/edu/stl/{id}")
     public @ResponseBody Optional<Labor_ad> getById_L(@PathVariable Long id) {
         return eduStService.findById_L(id);
@@ -103,5 +97,13 @@ public class AdminController {
     @GetMapping("/edu/stu")
     public @ResponseBody List<Unemployed_ad> getAll_st_U() {
         return eduStService.findAll_U();
+    }
+    @GetMapping("/senti/institute/{name}")
+    public @ResponseBody List<Senti_ed> getSentiByName(@PathVariable(required = false) String name) {
+        return sentiService.getInstituteSenti(name);
+    }
+    @GetMapping("/senti/address/{address}")
+    public @ResponseBody List<Senti_ad> getSentiByAddress(@PathVariable(required = false) String address) {
+        return sentiService.getAddressSenti(address);
     }
 }

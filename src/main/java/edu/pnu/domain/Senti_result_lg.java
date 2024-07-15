@@ -39,4 +39,9 @@ public class Senti_result_lg{
     @Column(name= "s_job_avg")
     private Double s_job_avg;
 
+    @Column(name = "star_avg")
+    private Double star_avg;
+    @Column(name ="count")
+    private Integer count;
+
 }

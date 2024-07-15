@@ -28,6 +28,8 @@ public class EduStService {
     @Autowired
     private final UnemployedAdRepository unemployedAdRepository;
 
+
+
     @Transactional(readOnly = true)
     public Optional<Labor_ad> findById_L(Long id) {
         return laborAdRepository.findById(id);

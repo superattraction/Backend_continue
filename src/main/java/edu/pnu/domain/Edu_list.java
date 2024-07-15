@@ -68,6 +68,8 @@ public class Edu_list {
 	private String urls;
 	@Column(name="edu_institute")
 	private String eduInstitute;
+	@OneToOne @JoinColumn(name = "course_id")
+	private Senti_keyword senti_keyword;
 
 
 //	@PostLoad
