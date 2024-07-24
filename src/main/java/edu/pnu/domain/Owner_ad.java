@@ -20,14 +20,14 @@ public class Owner_ad {
     private String edu_institute_ad;
 
     @Column(name= "2024년01월")
-    private Long l01;
+    private Long o202401;
     @Column(name= "2024년02월")
-    private Long l02;
+    private Long o202402;
     @Column(name= "2024년03월")
-    private Long l03;
+    private Long o202403;
     @Column(name= "2024년04월")
-    private Long l04;
+    private Long o202404;
     @Column(name= "2024년05월")
-    private Long l05;
+    private Long o202405;
 
 }
